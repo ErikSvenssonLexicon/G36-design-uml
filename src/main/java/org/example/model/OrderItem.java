@@ -5,9 +5,11 @@ import java.util.Objects;
 import java.util.UUID;
 
 public class OrderItem {
+
     private String id;
     private Integer amount;
     private Product product;
+    private ProductOrder productOrder;
 
     public OrderItem(String id, Integer amount, Product product) {
         if(id == null) throw new IllegalArgumentException("Id was null");
@@ -44,6 +46,14 @@ public class OrderItem {
 
     public void setProduct(Product product) {
         this.product = product;
+    }
+
+    public ProductOrder getProductOrder() {
+        return productOrder;
+    }
+
+    public void setProductOrder(ProductOrder productOrder) {
+        this.productOrder = productOrder;
     }
 
     @Override

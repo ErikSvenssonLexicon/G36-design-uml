@@ -2,6 +2,7 @@ package org.example.model;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.UUID;
 
 public class ProductOrder {
@@ -40,6 +41,18 @@ public class ProductOrder {
     }
 
     public void setOrderItems(List<OrderItem> orderItems) {
+        if(orderItems == null) orderItems = new ArrayList<>();
+        if(orderItems.isEmpty()){
+            if(this.orderItems != null){
+                for(OrderItem orderItem : this.orderItems){
+                    orderItem.setProductOrder(null);
+                }
+            }
+        }else {
+            for(OrderItem orderItem : orderItems){
+                orderItem.setProductOrder(this);
+            }
+        }
         this.orderItems = orderItems;
     }
 
@@ -58,6 +71,7 @@ public class ProductOrder {
         //Using contains (internally uses equals on OrderItem object)
         if(!orderItems.contains(orderItem)){
             orderItems.add(orderItem);
+            orderItem.setProductOrder(this);
         }
     }
 
@@ -66,5 +80,19 @@ public class ProductOrder {
         if(orderItems == null) orderItems = new ArrayList<>();
 
         orderItems.remove(orderItem);
+        orderItem.setProductOrder(null);
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        ProductOrder that = (ProductOrder) o;
+        return Objects.equals(id, that.id) && Objects.equals(status, that.status);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, status);
     }
 }
