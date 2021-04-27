@@ -4,7 +4,7 @@ import java.math.BigDecimal;
 import java.util.Objects;
 
 public class Product {
-    private String id;
+    private final String id;
     private String productName;
     private Double price;
 
@@ -13,7 +13,6 @@ public class Product {
         setProductName(productName);
         setPrice(price);
     }
-
 
     public String getId() {
         return id;
