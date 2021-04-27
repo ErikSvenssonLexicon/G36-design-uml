@@ -1,6 +1,7 @@
 package org.example.model;
 
 import java.math.BigDecimal;
+import java.util.Objects;
 
 public class Product {
     private String id;
@@ -9,12 +10,10 @@ public class Product {
 
     public Product(String id, String productName, Double price) {
         this.id = id;
-        this.productName = productName;
-        this.price = price;
+        setProductName(productName);
+        setPrice(price);
     }
 
-    public Product() {
-    }
 
     public String getId() {
         return id;
@@ -34,5 +33,18 @@ public class Product {
 
     public void setPrice(Double price) {
         this.price = price;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Product product = (Product) o;
+        return Objects.equals(id, product.id) && Objects.equals(productName, product.productName) && Objects.equals(price, product.price);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, productName, price);
     }
 }
