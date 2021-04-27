@@ -6,7 +6,7 @@ import java.util.UUID;
 
 public class OrderItem {
 
-    private String id;
+    private final String id;
     private Integer amount;
     private Product product;
     private ProductOrder productOrder;
