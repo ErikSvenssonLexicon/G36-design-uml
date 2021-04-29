@@ -9,6 +9,7 @@ public class Product {
     private Double price;
 
     public Product(String id, String productName, Double price) {
+        if(id == null) throw new RuntimeException("String id was null");
         this.id = id;
         setProductName(productName);
         setPrice(price);
@@ -23,6 +24,7 @@ public class Product {
     }
 
     public void setProductName(String productName) {
+        if(productName == null) throw new RuntimeException("String productName was null");
         this.productName = productName;
     }
 
@@ -31,6 +33,8 @@ public class Product {
     }
 
     public void setPrice(Double price) {
+        if(price == null) throw new RuntimeException("Double price was null");
+        if(price < 0) throw new RuntimeException("Double price is a negative value");
         this.price = price;
     }
 
