@@ -4,6 +4,33 @@ import java.math.BigDecimal;
 import java.util.Objects;
 
 public class Product {
+
+    public static class Builder{
+        private String id;
+        private String productName;
+        private Double price;
+
+        public Builder(String id){
+            this.id = id;
+        }
+
+        public Builder withProductName(String productName){
+            this.productName = productName;
+            return this;
+        }
+
+        public Builder withPrice(Double price){
+            this.price = price;
+            return this;
+        }
+
+        public Product build(){
+            return new Product(id, productName, price);
+        }
+    }
+
+
+
     private final String id;
     private String productName;
     private Double price;
@@ -14,6 +41,8 @@ public class Product {
         setProductName(productName);
         setPrice(price);
     }
+
+
 
     public String getId() {
         return id;
@@ -49,5 +78,14 @@ public class Product {
     @Override
     public int hashCode() {
         return Objects.hash(id, productName, price);
+    }
+
+    @Override
+    public String toString() {
+        return "Product{" +
+                "id='" + id + '\'' +
+                ", productName='" + productName + '\'' +
+                ", price=" + price +
+                '}';
     }
 }
